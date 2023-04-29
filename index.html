@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Signup Form </title>
+    <link rel="stylesheet" href="style.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+      <form action="#">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Full Name</span>
+            <input type="text" placeholder="Enter your name" required>
+          </div>
+          
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" placeholder="Enter your email" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="number" placeholder="Enter your number" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="password" placeholder="Enter your password" required>
+          </div>
+          <p><a href="checkpass.html">Want to see how long it will take to crack your password?</a></p><br><br>
+          <div id="captcha-container">
+            <span id="captcha-text"></span>
+            <input type="text" id="captcha-input" placeholder="Type the code above">
+            <button id="captcha-btn">Submit</button>
+            </div>
+            
+            <script>
+            // Generate a random string of numbers and letters
+            function generateCaptcha(length) {
+              let result = '';
+              const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+              const charactersLength = characters.length;
+              for (let i = 0; i < length; i++) {
+              result += characters.charAt(Math.floor(Math.random() * charactersLength));
+              }
+              return result;
+            }
+            
+            const captchaText = document.getElementById('captcha-text');
+            const captchaInput = document.getElementById('captcha-input');
+            const captchaBtn = document.getElementById('captcha-btn');
+            
+            // Initialize the captcha
+            let captcha = generateCaptcha(6);
+            captchaText.textContent = captcha;
+            
+            // Handle the submit button click event
+            captchaBtn.addEventListener('click', () => {
+              if (captchaInput.value === captcha) {
+              alert('Captcha passed!');
+              } else {
+              alert('Incorrect captcha, please try again.');
+              captcha = generateCaptcha(6);
+              captchaText.textContent = captcha;
+              captchaInput.value = '';
+              }
+            });
+            
+            // Prevent copying and pasting in the captcha field
+            captchaInput.addEventListener('copy', (event) => {
+              event.preventDefault();
+              return false;
+            });
+            
+            captchaInput.addEventListener('paste', (event) => {
+              event.preventDefault();
+              return false;
+            });
+            </script>
+            
+          
+        </div>
+        <div class="gender-details">
+          <input type="radio" name="gender" id="dot-1">
+          <input type="radio" name="gender" id="dot-2">
+          <input type="radio" name="gender" id="dot-3">
+          <span class="gender-title">Gender</span>
+          <div class="category">
+            <label for="dot-1">
+            <span class="dot one"></span>
+            <span class="gender">Male</span>
+          </label>
+          <label for="dot-2">
+            <span class="dot two"></span>
+            <span class="gender">Female</span>
+          </label>
+          <label for="dot-3">
+            <span class="dot three"></span>
+            <span class="gender">Prefer not to say</span>
+            </label>
+          </div>
+        </div>
+        <div class="button">
+          <a href="main.html">
+            <input type="submit" value="Register">
+          </a>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
